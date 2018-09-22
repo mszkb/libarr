@@ -19,12 +19,13 @@ describe('libarr', () => {
     let array2 = []
 
     libarr.arr_copyTo(array1, array2)
+    libarr.arr_copyTo(array1, array2)
 
     expect(array1.length).toBe(10)
     expect(array1[0]).toBe(0)
     expect(array1[9]).toBe(9)
 
-    expect(array2.length).toBe(10)
+    expect(array2.length).toBe(20)
     expect(array2[0]).toBe(0)
     expect(array2[9]).toBe(9)
   });

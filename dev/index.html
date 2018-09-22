@@ -1,8 +1,169 @@
 <html>
 <body>
-<script src="../dist/rollup-jest-boilerplate.umd.js"></script>
+
+<div id="arr_copyTo">
+    <button id="testCopyTo">Test copyTo</button>
+    <br />
+    <br />
+    <u>List A</u>
+    <ul id="copyA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+    <u>List B</u>
+    <ul id="copyB">
+    </ul>
+</div>
+
+<div id="arr_moveTo">
+    <button id="testMoveTo">Test moveTo</button>
+    <br />
+    <br />
+    <u>List A</u>
+    <ul id="moveA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+    <u>List B</u>
+    <ul id="moveB">
+    </ul>
+</div>
+
+<div id="arr_moveToOf">
+    <button id="testMoveToOf">Test moveToOf</button>
+    <br />
+    <br />
+    <u>List A</u>
+    <ul id="moveToOfA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+        <li>F</li>
+    </ul>
+    <u>List B</u>
+    <ul id="moveToOfB">
+    </ul>
+    <u>List C</u>
+    <ul id="movetoOfC">
+        <li>A</li>
+        <li>C</li>
+        <li>B</li>
+    </ul>
+</div>
+
+<div id="arr_removeOf">
+    <button id="testRemoveOf">Test removeOf</button>
+    <br />
+    <br />
+    <u>List A</u>
+    <ul id="removeOfA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+    </ul>
+    <u>List B</u>
+    <ul id="removeOfB">
+        <li>A</li>
+        <li>B</li>
+    </ul>
+</div>
+
+<div id="arr_clear">
+    <button id="testClear">Test clear</button>
+    <br />
+    <br />
+    <u>List A</u>
+    <ul id="clearA">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+</div>
+
+
+<script src="../dist/libarr.umd.js"></script>
+<script>
+let a = libarr
+
+document.getElementById('testCopyTo').addEventListener('click', (e) => {
+  e.preventDefault()
+
+  // get elements from both A and B lists and make an array out of the them
+  // call arr_copyTo function
+  // clear the destination container to prevent duplicates
+  // iterate over the new array and create <li> elements
+
+  // this is how u make an array out of a NodeList
+  let sourceA = [].slice.call(document.querySelectorAll('#copyA li'))
+  let sourceB = [].slice.call(document.querySelectorAll('#copyB li'))
+
+  a.arr_copyTo(sourceA, sourceB)
+
+  // clear the destination container - prevent duplicates
+  const sourceBcontainer = document.getElementById('copyB')
+  sourceBcontainer.innerText = ''
+
+  sourceB.map((e) => {
+    // create <li> elements for each element of the new sourceB array
+    const x = document.createElement('li')
+    x.appendChild(document.createTextNode(e.textContent))
+    sourceBcontainer.appendChild(x)
+  })
+})
+
+document.getElementById('testMoveTo').addEventListener('click', (e) => {
+  e.preventDefault()
+
+  // this is how u make an array out of a NodeList
+  let sourceA = [].slice.call(document.querySelectorAll('#moveA li'))
+  let sourceB = [].slice.call(document.querySelectorAll('#moveB li'))
+
+  a.arr_moveTo(sourceA, sourceB)
+
+  const sourceContainer = document.getElementById('moveA')
+  const destContainer = document.getElementById('moveB')
+  sourceContainer.innerText = ''
+  destContainer.innerText = ''
+
+  sourceB.map((e) => {
+    const x = document.createElement('li')
+    x.appendChild(document.createTextNode(e.textContent))
+    destContainer.appendChild(x)
+  })
+})
+
+document.getElementById('testMoveToOf').addEventListener('click', (e) => {
+  e.preventDefault()
+
+  // this is how u make an array out of a NodeList
+  let sourceA = [].slice.call(document.querySelectorAll('#moveToOfA li'))
+  let sourceB = [].slice.call(document.querySelectorAll('#moveToOfB li'))
+  let sourceC = [].slice.call(document.querySelectorAll('#moveToOfC li'))
+
+  a.arr_moveToOf(sourceA, sourceB, sourceC)
+
+  console.log('a')
+})
+
+document.getElementById('testRemoveOf').addEventListener('click', () => {
+
+})
+
+document.getElementById('testClear').addEventListener('click', (e) => {
+  e.preventDefault()
+
+  let clearA = [].slice.call(document.querySelectorAll('#clearA li'))
+  a.arr_clear(clearA)
+  document.getElementById('clearA').innerHTML = clearA
+
+  clearA.length === 0 ? console.log('cleared successfully') : console.log('cleared unsuccessfully')
+})
+
+</script>
 </body>
 </html>
-<script>
-    console.log(rollupJestBoilerplate('rest'));
-</script>

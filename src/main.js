@@ -26,6 +26,7 @@ class libarr {
       a2.push(e)
     })
 
+    this.arr_clear(Array2)
     Array2.push(...a2)
   }
 
