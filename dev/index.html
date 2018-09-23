@@ -3,8 +3,8 @@
 
 <div id="arr_copyTo">
     <button id="testCopyTo">Test copyTo</button>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <u>List A</u>
     <ul id="copyA">
         <li>A</li>
@@ -18,8 +18,8 @@
 
 <div id="arr_moveTo">
     <button id="testMoveTo">Test moveTo</button>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <u>List A</u>
     <ul id="moveA">
         <li>A</li>
@@ -33,8 +33,8 @@
 
 <div id="arr_moveToOf">
     <button id="testMoveToOf">Test moveToOf</button>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <u>List A</u>
     <ul id="moveToOfA">
         <li>A</li>
@@ -57,8 +57,8 @@
 
 <div id="arr_removeOf">
     <button id="testRemoveOf">Test removeOf</button>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <u>List A</u>
     <ul id="removeOfA">
         <li>A</li>
@@ -75,8 +75,8 @@
 
 <div id="arr_clear">
     <button id="testClear">Test clear</button>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <u>List A</u>
     <ul id="clearA">
         <li>A</li>
@@ -88,81 +88,136 @@
 
 <script src="../dist/libarr.umd.js"></script>
 <script>
-let a = libarr
+  let a = libarr
 
-document.getElementById('testCopyTo').addEventListener('click', (e) => {
-  e.preventDefault()
+  document.getElementById('testCopyTo').addEventListener('click', (e) => {
+    e.preventDefault()
 
-  // get elements from both A and B lists and make an array out of the them
-  // call arr_copyTo function
-  // clear the destination container to prevent duplicates
-  // iterate over the new array and create <li> elements
+    // get elements from both A and B lists and make an array out of the them
+    // call arr_copyTo function
+    // clear the destination container to prevent duplicates
+    // iterate over the new array and create <li> elements
 
-  // this is how u make an array out of a NodeList
-  let sourceA = [].slice.call(document.querySelectorAll('#copyA li'))
-  let sourceB = [].slice.call(document.querySelectorAll('#copyB li'))
+    // this is how u make an array out of a NodeList
+    let sourceA = [].slice.call(document.querySelectorAll('#copyA li'))
+    let sourceB = [].slice.call(document.querySelectorAll('#copyB li'))
 
-  a.arr_copyTo(sourceA, sourceB)
+    a.arr_copyTo(sourceA, sourceB)
 
-  // clear the destination container - prevent duplicates
-  const sourceBcontainer = document.getElementById('copyB')
-  sourceBcontainer.innerText = ''
+    // clear the destination container - prevent duplicates
+    const sourceBcontainer = document.getElementById('copyB')
+    sourceBcontainer.innerText = ''
 
-  sourceB.map((e) => {
-    // create <li> elements for each element of the new sourceB array
-    const x = document.createElement('li')
-    x.appendChild(document.createTextNode(e.textContent))
-    sourceBcontainer.appendChild(x)
+    sourceB.map((e) => {
+      // create <li> elements for each element of the new sourceB array
+      const x = document.createElement('li')
+      x.appendChild(document.createTextNode(e.textContent))
+      sourceBcontainer.appendChild(x)
+    })
   })
-})
 
-document.getElementById('testMoveTo').addEventListener('click', (e) => {
-  e.preventDefault()
+  document.getElementById('testMoveTo').addEventListener('click', (e) => {
+    e.preventDefault()
 
-  // this is how u make an array out of a NodeList
-  let sourceA = [].slice.call(document.querySelectorAll('#moveA li'))
-  let sourceB = [].slice.call(document.querySelectorAll('#moveB li'))
+    // this is how u make an array out of a NodeList
+    let sourceA = [].slice.call(document.querySelectorAll('#moveA li'))
+    let sourceB = [].slice.call(document.querySelectorAll('#moveB li'))
 
-  a.arr_moveTo(sourceA, sourceB)
+    a.arr_moveTo(sourceA, sourceB)
 
-  const sourceContainer = document.getElementById('moveA')
-  const destContainer = document.getElementById('moveB')
-  sourceContainer.innerText = ''
-  destContainer.innerText = ''
+    const sourceContainer = document.getElementById('moveA')
+    const destContainer = document.getElementById('moveB')
+    sourceContainer.innerText = ''
+    destContainer.innerText = ''
 
-  sourceB.map((e) => {
-    const x = document.createElement('li')
-    x.appendChild(document.createTextNode(e.textContent))
-    destContainer.appendChild(x)
+    sourceB.map((e) => {
+      const x = document.createElement('li')
+      x.appendChild(document.createTextNode(e.textContent))
+      destContainer.appendChild(x)
+    })
   })
-})
 
-document.getElementById('testMoveToOf').addEventListener('click', (e) => {
-  e.preventDefault()
+  document.getElementById('testMoveToOf').addEventListener('click', (e) => {
+    e.preventDefault()
 
-  // this is how u make an array out of a NodeList
-  let sourceA = [].slice.call(document.querySelectorAll('#moveToOfA li'))
-  let sourceB = [].slice.call(document.querySelectorAll('#moveToOfB li'))
-  let sourceC = [].slice.call(document.querySelectorAll('#moveToOfC li'))
+    // this is how u make an array out of a NodeList
+    let sourceA = [].slice.call(document.querySelectorAll('#moveToOfA li'))
+    let sourceB = [].slice.call(document.querySelectorAll('#moveToOfB li'))
+    let sourceC = [].slice.call(document.querySelectorAll('#moveToOfC li'))
 
-  a.arr_moveToOf(sourceA, sourceB, sourceC)
+    const textA = []
+    const textB = []
+    const textC = []
 
-  console.log('a')
-})
+    sourceA.map((e) => {
+      textA.push(e.innerHTML)
+    })
+    sourceB.map((e) => {
+      textB.push(e.innerHTML)
+    })
+    sourceC.map((e) => {
+      textC.push(e.innerHTML)
+    })
 
-document.getElementById('testRemoveOf').addEventListener('click', () => {
+    a.arr_moveToOf(textA, textB, textC)
 
-})
+    const sourceContainer = document.getElementById('moveToOfA')
+    const destContainer = document.getElementById('moveToOfB')
+    const compareContainer = document.getElementById('moveToOfC')
 
-document.getElementById('testClear').addEventListener('click', (e) => {
-  e.preventDefault()
+    sourceContainer.innerText = ''
+    destContainer.innerText = ''
 
-  let clearA = [].slice.call(document.querySelectorAll('#clearA li'))
-  a.arr_clear(clearA)
-  document.getElementById('clearA').innerHTML = clearA
+    textA.map((e) => {
+      const x = document.createElement('li')
+      x.appendChild(document.createTextNode(e))
+      sourceContainer.appendChild(x)
+    })
+    textB.map((e) => {
+      const x = document.createElement('li')
+      x.appendChild(document.createTextNode(e))
+      destContainer.appendChild(x)
+    })
+  })
 
-  clearA.length === 0 ? console.log('cleared successfully') : console.log('cleared unsuccessfully')
-})
+  document.getElementById('testRemoveOf').addEventListener('click', (e) => {
+    e.preventDefault()
+
+    // this is how u make an array out of a NodeList
+    let sourceA = [].slice.call(document.querySelectorAll('#removeOfA li'))
+    let sourceB = [].slice.call(document.querySelectorAll('#removeOfB li'))
+
+    const textA = []
+    const textB = []
+
+    sourceA.map((e) => {
+      textA.push(e.innerHTML)
+    })
+    sourceB.map((e) => {
+      textB.push(e.innerHTML)
+    })
+
+    a.arr_removeOf(textA, textB)
+
+    const sourceContainer = document.getElementById('removeOfA')
+    sourceContainer.innerText = ''
+
+    textA.map((e) => {
+      const x = document.createElement('li')
+      x.appendChild(document.createTextNode(e))
+      sourceContainer.appendChild(x)
+    })
+  })
+
+  document.getElementById('testClear').addEventListener('click', (e) => {
+    e.preventDefault()
+
+    let clearA = [].slice.call(document.querySelectorAll('#clearA li'))
+    a.arr_clear(clearA)
+    document.getElementById('clearA').innerHTML = clearA
+
+    clearA.length === 0 ? console.log('cleared successfully') : console.log('cleared unsuccessfully')
+  })
 
 </script>
 </body>
